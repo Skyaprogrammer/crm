@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- 主配置文件，连接数据库的必要信息 -->
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///crm_hibernate</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<!-- 数据库方言
+			不同的数据库中，sql语法略有区别，指定方言，可以让hibernate框架在生成sql语句时，针对数据库的方言生成 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- 
+		#hibernate.show_sql true 
+		#hibernate.format_sql true
+		-->
+		<property name="hibernate.show_sql">true</property><!-- hibernate生成sql语句，可以打印 -->
+		<property name="hibernate.format_sql">true</property><!-- 格式化sql，防止sql语句一句到底 -->
+		<!--
+		## auto schema export 自动导出表结构，自动建表
+		
+		#hibernate.hbm2ddl.auto create				自动建表，每次框架运行都会创建新的表，（开发环境测试使用）
+		#hibernate.hbm2ddl.auto create-drop			创建删除，每次框架运行结束会删除所有的表
+		#hibernate.hbm2ddl.auto update 				已经存在表，实现更新操作，保留原有数据进行更新操作（常用），如果没有表，会创建一份表，再进行后续操作
+		#hibernate.hbm2ddl.auto validate			校验，不自动生成表，每次启动会校验数据库中表是否有问题，校验实体与name是否一致。
+		-->
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>	
+		
+		<!-- 映射到配置好的文件 -->
+		<!-- 引入orm元数据，注意填写的路径是相对于src下的路径 -->
+<!-- 		<mapping resource="/jack/domain/Customer.hbm.xml" />
+		<mapping resource="/jack/domain/LinkMan.hbm.xml" /> -->
+		<mapping resource="/jack/domain/User.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
